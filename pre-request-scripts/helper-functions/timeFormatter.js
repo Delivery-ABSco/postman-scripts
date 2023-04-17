@@ -16,12 +16,7 @@
 */
 
 function formatDate(dateObj) {
-    var yr = dateObj.getUTCFullYear();
-    var mth = (dateObj.getUTCMonth() + 1).toString().padStart(2, '0');
-    var date = dateObj.getDate().toString().padStart(2, '0');
-    var hrs = dateObj.getHours().toString().padStart(2, '0');
-    var mins = dateObj.getMinutes().toString().padStart(2, '0');
-    var secs = dateObj.getSeconds().toString().padStart(2, '0');
-    var formattedDate = `${yr}-${mth}-${date} ${hrs}:${mins}:${secs}`;
+    var ISOString = dateObj.toISOString();
+    var formattedDate = ISOString.slice(0, -5).replace('T', ' ');
     return formattedDate;
 };
