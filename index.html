@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0f0d">
+    <title>Team clock — live timezone board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.mjs"></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Team clock home">
+          <span class="brand-mark" aria-hidden="true">TC</span>
+          <span>TEAM<span class="brand-light">CLOCK</span></span>
+        </a>
+        <span class="live-indicator"><span class="live-dot"></span><span>LIVE</span><span class="live-divider">/</span>1 SEC REFRESH</span>
+      </header>
+
+      <section class="dashboard-intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-mark">01</span> GLOBAL TIME / TEAM NETWORK</p>
+          <h1 id="page-title">TEAM <span>WORLD CLOCK</span></h1>
+          <p class="intro-copy">Seven regions. One shared moment. Times stay current through every daylight-saving shift.</p>
+        </div>
+        <div class="system-readout">
+          <span>SCHEDULING REFERENCE</span>
+          <strong><i aria-hidden="true"></i> PACIFIC TIME</strong>
+          <small>America/San_Francisco · PST / PDT</small>
+        </div>
+      </section>
+
+      <section class="clocks-section" aria-labelledby="clocks-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-mark">02</span> LIVE READOUT</p>
+            <h2 id="clocks-title">Local time by region</h2>
+          </div>
+          <span class="section-note"><span class="section-indicator"></span> IANA TIMEZONE / DST AWARE</span>
+        </div>
+        <div class="clock-grid" id="clock-grid" aria-live="off"></div>
+        <p class="config-hint" id="config-hint" hidden>
+          Add real coworker names and IANA timezone IDs in <code>coworkers.mjs</code> to personalize this page.
+        </p>
+      </section>
+
+      <section class="planner" aria-labelledby="planner-title">
+        <header class="planner-header">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-mark">03</span> MEETING CONVERTER</p>
+            <h2 id="planner-title">Pick a time. Find the overlap.</h2>
+            <p>Enter Pacific local time, then compare the moment across your team.</p>
+          </div>
+          <div class="source-chip">
+            <span>DEFAULT SOURCE</span>
+            <strong>AMERICA/SAN_FRANCISCO</strong>
+          </div>
+        </header>
+        <div class="planner-body">
+          <form id="meeting-form">
+            <label id="meeting-time-label" for="meeting-time">Meeting date &amp; time (Pacific local time)</label>
+            <div class="meeting-inputs">
+              <input id="meeting-time" name="meeting-time" type="datetime-local" required>
+              <select id="meeting-zone" name="meeting-zone" aria-label="Meeting time zone (defaults to Pacific)"></select>
+            </div>
+            <p class="form-hint">Pacific time (PST/PDT) · adjusts automatically for daylight saving.</p>
+            <button type="submit">CONVERT TO TEAM TIME <span aria-hidden="true">↗</span></button>
+            <p class="form-error" id="form-error" role="alert" hidden></p>
+          </form>
+
+          <div class="results" id="meeting-results" hidden aria-live="polite">
+            <div class="results-heading">
+              <h3>That’s the moment</h3>
+              <span class="results-badge">LOCAL READOUT</span>
+            </div>
+            <p class="results-source" id="results-source"></p>
+            <div class="results-list" id="results-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>TEAM CLOCK <span class="footer-divider">/</span> LOCAL TIMES FROM IANA ZONES</span>
+        <span>TIME IS DISPLAYED IN EACH REGION’S CURRENT OFFSET.</span>
+      </footer>
+    </main>
+  </body>
+</html>
